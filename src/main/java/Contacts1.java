@@ -51,8 +51,8 @@ public class Contacts1 {
     private static final String COMMAND_ADD_WORD = "add";
     private static final String COMMAND_ADD_DESC = "Adds a person to contacts.";
     private static final String COMMAND_ADD_PARAMETERS = "NAME "
-                                                      + PERSON_DATA_PREFIX_PHONE + "PHONE_NUMBER "
-                                                      + PERSON_DATA_PREFIX_EMAIL + "EMAIL";
+            + PERSON_DATA_PREFIX_PHONE + "PHONE_NUMBER "
+            + PERSON_DATA_PREFIX_EMAIL + "EMAIL";
     private static final String COMMAND_ADD_EXAMPLE = COMMAND_ADD_WORD + " John Doe p/98765432 e/johnd@gmail.com";
 
     private static final String COMMAND_LIST_WORD = "list";
@@ -87,7 +87,7 @@ public class Contacts1 {
      * The number of data elements for a single person.
      */
     private static final int PERSON_DATA_COUNT = 3;
-    
+
     /**
      * Maximum number of persons that can be held.
      */
@@ -192,8 +192,8 @@ public class Contacts1 {
     /**
      * Executes the command as specified by the {@code userInputString}
      *
-     * @param userInputString  raw input from user
-     * @return  feedback about how the command was executed
+     * @param userInputString raw input from user
+     * @return feedback about how the command was executed
      */
     private static String executeCommand(String userInputString) {
         final String[] commandTypeAndParams = splitCommandWordAndArgs(userInputString);
@@ -219,11 +219,11 @@ public class Contacts1 {
     /**
      * Splits raw user input into command word and command arguments string
      *
-     * @return  size 2 array; first element is the command type and second element is the arguments string
+     * @return size 2 array; first element is the command type and second element is the arguments string
      */
     private static String[] splitCommandWordAndArgs(String rawUserInput) {
         final String[] split = rawUserInput.trim().split("\\s+", 2);
-        return split.length == 2 ? split : new String[] { split[0] , "" }; // else case: no parameters
+        return split.length == 2 ? split : new String[]{split[0], ""}; // else case: no parameters
     }
 
     /**
@@ -349,7 +349,6 @@ public class Contacts1 {
     /**
      * Shows the list of persons to the user.
      * The list will be indexed, starting from 1.
-     *
      */
     private static void showToUser(String[][] persons) {
         String listAsString = getDisplayString(persons);
@@ -365,8 +364,8 @@ public class Contacts1 {
             final String[] person = persons[i];
             final int displayIndex = i + 1;
             messageAccumulator.append('\t')
-                              .append(getIndexedPersonListElementMessage(displayIndex, person))
-                              .append(LS);
+                    .append(getIndexedPersonListElementMessage(displayIndex, person))
+                    .append(LS);
         }
         return messageAccumulator.toString();
     }
@@ -375,7 +374,7 @@ public class Contacts1 {
      * Constructs a prettified listing element message to represent a person and their data.
      *
      * @param visibleIndex visible index for this listing
-     * @param person to show
+     * @param person       to show
      * @return formatted listing message with index
      */
     private static String getIndexedPersonListElementMessage(int visibleIndex, String[] person) {
@@ -456,7 +455,7 @@ public class Contacts1 {
     /**
      * Creates a person from the given data.
      *
-     * @param name of person
+     * @param name  of person
      * @param phone without data prefix
      * @param email without data prefix
      * @return constructed person
@@ -474,7 +473,7 @@ public class Contacts1 {
      *
      * @param encoded string to be decoded
      * @return if cannot decode: empty Optional
-     *         else: Optional containing decoded person
+     * else: Optional containing decoded person
      */
     private static String[] decodePersonFromString(String encoded) {
         // check that we can extract the parts of a person from the encoded string
@@ -535,7 +534,7 @@ public class Contacts1 {
             return removePrefixSign(encoded.substring(indexOfPhonePrefix, encoded.length()).trim(),
                     PERSON_DATA_PREFIX_PHONE);
 
-        // phone is middle arg, target is from own prefix to next prefix
+            // phone is middle arg, target is from own prefix to next prefix
         } else {
             return removePrefixSign(
                     encoded.substring(indexOfPhonePrefix, indexOfEmailPrefix).trim(),
@@ -558,7 +557,7 @@ public class Contacts1 {
             return removePrefixSign(encoded.substring(indexOfEmailPrefix, encoded.length()).trim(),
                     PERSON_DATA_PREFIX_EMAIL);
 
-        // email is middle arg, target is from own prefix to next prefix
+            // email is middle arg, target is from own prefix to next prefix
         } else {
             return removePrefixSign(
                     encoded.substring(indexOfEmailPrefix, indexOfPhonePrefix).trim(),
@@ -615,7 +614,9 @@ public class Contacts1 {
      * ===============================================
      */
 
-    /** Returns usage info for all commands */
+    /**
+     * Returns usage info for all commands
+     */
     private static String getUsageInfoForAllCommands() {
         return getUsageInfoForAddCommand() + LS
                 + getUsageInfoForViewCommand() + LS
@@ -624,32 +625,42 @@ public class Contacts1 {
                 + getUsageInfoForHelpCommand();
     }
 
-    /** Returns the string for showing 'add' command usage instruction */
+    /**
+     * Returns the string for showing 'add' command usage instruction
+     */
     private static String getUsageInfoForAddCommand() {
         return String.format(MESSAGE_COMMAND_HELP, COMMAND_ADD_WORD, COMMAND_ADD_DESC) + LS
                 + String.format(MESSAGE_COMMAND_HELP_PARAMETERS, COMMAND_ADD_PARAMETERS) + LS
                 + String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_ADD_EXAMPLE) + LS;
     }
 
-    /** Returns string for showing 'clear' command usage instruction */
+    /**
+     * Returns string for showing 'clear' command usage instruction
+     */
     private static String getUsageInfoForClearCommand() {
         return String.format(MESSAGE_COMMAND_HELP, COMMAND_CLEAR_WORD, COMMAND_CLEAR_DESC) + LS
                 + String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_CLEAR_EXAMPLE) + LS;
     }
 
-    /** Returns the string for showing 'view' command usage instruction */
+    /**
+     * Returns the string for showing 'view' command usage instruction
+     */
     private static String getUsageInfoForViewCommand() {
         return String.format(MESSAGE_COMMAND_HELP, COMMAND_LIST_WORD, COMMAND_LIST_DESC) + LS
                 + String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_LIST_EXAMPLE) + LS;
     }
 
-    /** Returns string for showing 'help' command usage instruction */
+    /**
+     * Returns string for showing 'help' command usage instruction
+     */
     private static String getUsageInfoForHelpCommand() {
         return String.format(MESSAGE_COMMAND_HELP, COMMAND_HELP_WORD, COMMAND_HELP_DESC) + LS
                 + String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_HELP_EXAMPLE);
     }
 
-    /** Returns the string for showing 'exit' command usage instruction */
+    /**
+     * Returns the string for showing 'exit' command usage instruction
+     */
     private static String getUsageInfoForExitCommand() {
         return String.format(MESSAGE_COMMAND_HELP, COMMAND_EXIT_WORD, COMMAND_EXIT_DESC) + LS
                 + String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_EXIT_EXAMPLE) + LS;
@@ -665,9 +676,9 @@ public class Contacts1 {
     /**
      * Removes sign(p/, d/, etc) from parameter string
      *
-     * @param s  Parameter as a string
-     * @param sign  Parameter sign to be removed
-     * @return  string without the sign
+     * @param s    Parameter as a string
+     * @param sign Parameter sign to be removed
+     * @return string without the sign
      */
     private static String removePrefixSign(String s, String sign) {
         return s.replace(sign, "");
